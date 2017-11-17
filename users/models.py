@@ -45,6 +45,9 @@ class UserProfile(models.Model):
 
     def is_officer(self):
         return user_type == 3
+    def can_hold_oh(self):
+        is_prof_dev = committee == 'PRO'
+        return (user_type == 3) or (user_type == 1 and is_prof_dev) or (user_type == 2 and is_prof_dev)
     def can_interview(self):
         return self.can_interview
     def get_committee_display(self):
