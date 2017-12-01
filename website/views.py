@@ -26,7 +26,9 @@ def index(request):
     return render(request, 'website/index.html', { 'officers': officers })
 
 def oh(request):
-    return render(request, 'website/oh.html', {})
+    office_hour_peeps = UserProfile.objects.all()
+    office_hour_peeps = [x for x in office_hour_peeps if x.can_hold_oh()]
+    return render(request, 'website/oh.html', { 'office_hour_peeps' : office_hour_peeps})
 
 def ir(request):
     return render(request, 'website/ir.html', {})
